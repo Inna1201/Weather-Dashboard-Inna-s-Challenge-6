@@ -14,12 +14,18 @@ serachBtn.addEventListener('click', showResult);
 
 function showResult() {
     var cityName = document.querySelector('.cityName').value;
+    if (!cityName) {
+        return;
+    }
     // runs cityHistory in array and gives an index (or -1 if not in an array)
     if (cityHistory.indexOf(cityName) === -1) {
         // if new city entered will add into array
         cityHistory.push(cityName);
         localStorage.setItem("history", JSON.stringify(cityHistory));
     }
+
+    // sets empty string iside parent element
+    document.querySelector(".searchHist").innerHTML = ""
 
     for (var i = 0; i < cityHistory.length; i++) {
 
@@ -83,8 +89,17 @@ function getWeather(lat, lon, name) {
             mainWind.textContent = "Wind: " + data.current.wind_speed + " MPH";
             mainHum.textContent = "Humidity: " + data.current.humidity + " %";
             mainUV.textContent = "UV Index: " + data.current.uvi;
+            console.log(data.current.uvi)
 
-            // setting parent element to empty string
+            if (data.current.uvi < 2) {
+                mainUV.setAttribute("class", "p-3 mb-2 bg-success text-white")
+            } else if (data.current.uvi > 2 & data.current.uvi < 6) {
+                mainUV.setAttribute("class", "p-3 mb-2 bg-warning text-white")
+            } else {
+                mainUV.setAttribute("class", "p-3 mb-2 bg-danger text-white")
+            }
+
+            // sets empty string iside parent element
             document.querySelector(".forecast").innerHTML = ""
 
             // loop over the data to generate a weather cards for five days
