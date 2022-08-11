@@ -41,7 +41,7 @@ function showResult() {
 
 function getGeo(city) {
 
-    var url = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + APIkey;
+    var url = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + APIkey;
     // fetch request gets an info of the geolocation 
     fetch(url)
         .then(function (response) {
