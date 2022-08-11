@@ -91,6 +91,7 @@ function getWeather(lat, lon, name) {
             mainUV.textContent = "UV Index: " + data.current.uvi;
             console.log(data.current.uvi)
 
+            //sets color indicator depending of UV index
             if (data.current.uvi < 2) {
                 mainUV.setAttribute("class", "p-3 mb-2 bg-success text-white")
             } else if (data.current.uvi > 2 & data.current.uvi < 6) {
